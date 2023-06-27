@@ -1,1 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>API Table</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
 
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h1>API Table</h1>
+  
+  <table>
+    <tr>
+      <th>API</th>
+      <th>API Description</th>
+      <th>Action</th>
+    </tr>
+    <tr>
+      <td>Country Info</td>
+      <td>Get information about a specific country</td>
+      <td>
+        <button onclick="getCountryInfo()">Get Country Info</button>
+      </td>
+    </tr>
+    <tr>
+      <td>Earthquakes</td>
+      <td>Retrieve information about recent earthquakes</td>
+      <td>
+        <button onclick="getEarthquakes()">Get Earthquakes</button>
+      </td>
+    </tr>
+    <tr>
+      <td>Find Nearest Address</td>
+      <td>Find the nearest address to a given location</td>
+      <td>
+        <button onclick="findNearestAddress()">Find Nearest Address</button>
+      </td>
+    </tr>
+   
+  </table>
+  
+  <script>
+    // Replace with your actual GeoNames API username
+    const username = 'YOUR_GEO_NAMES_USERNAME';
+
+    function getCountryInfo() {
+      // Make the API call using the GeoNames Country Info API
+      var apiUrl = `http://api.geonames.org/countryInfoJSON?country=US&username=${username}`;
+    
+      console.log('Calling Country Info API');
+    }
+    
+    function getEarthquakes() {
+      // Make the API call using the GeoNames Earthquakes API
+      var apiUrl = `http://api.geonames.org/earthquakesJSON?north=44.1&south=-9.9&east=-22.4&west=55.2&username=${username}`;
+      
+      console.log('Calling Earthquakes API');
+    }
+    
+    function findNearestAddress() {
+      // Make the API call using the GeoNames Find Nearest Address API
+      var apiUrl = `http://api.geonames.org/findNearestAddressJSON?lat=47.01&lng=10.2&username=${username}`;
+   
+      console.log('Calling Find Nearest Address API');
+    }
+    
+    
+    
+  </script>
+</body>
+</html>

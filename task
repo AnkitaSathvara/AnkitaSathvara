@@ -46,10 +46,20 @@
       <td>Find Nearest Address</td>
       <td>Find the nearest address to a given location</td>
       <td>
+        <input type="text" id="latitude" placeholder="Latitude">
+        <input type="text" id="longitude" placeholder="Longitude">
         <button onclick="findNearestAddress()">Find Nearest Address</button>
       </td>
     </tr>
-   
+    <tr>
+      <td>Custom API</td>
+      <td>Custom API Description</td>
+      <td>
+        <input type="text" id="customInput" placeholder="Custom Input">
+        <button onclick="callCustomAPI()">Call Custom API</button>
+      </td>
+    </tr>
+    <!-- Add more API rows here -->
   </table>
   
   <script>
@@ -59,25 +69,39 @@
     function getCountryInfo() {
       // Make the API call using the GeoNames Country Info API
       var apiUrl = `http://api.geonames.org/countryInfoJSON?country=US&username=${username}`;
-    
+      // Perform the necessary fetch or AJAX call to apiUrl
       console.log('Calling Country Info API');
     }
     
     function getEarthquakes() {
       // Make the API call using the GeoNames Earthquakes API
       var apiUrl = `http://api.geonames.org/earthquakesJSON?north=44.1&south=-9.9&east=-22.4&west=55.2&username=${username}`;
-      
+      // Perform the necessary fetch or AJAX call to apiUrl
       console.log('Calling Earthquakes API');
     }
     
     function findNearestAddress() {
+      // Get the latitude and longitude values entered by the user
+      var latitude = document.getElementById('latitude').value;
+      var longitude = document.getElementById('longitude').value;
+      
       // Make the API call using the GeoNames Find Nearest Address API
-      var apiUrl = `http://api.geonames.org/findNearestAddressJSON?lat=47.01&lng=10.2&username=${username}`;
-   
+      var apiUrl = `http://api.geonames.org/findNearestAddressJSON?lat=${latitude}&lng=${longitude}&username=${username}`;
+      // Perform the necessary fetch or AJAX call to apiUrl
       console.log('Calling Find Nearest Address API');
     }
     
+    function callCustomAPI() {
+      // Get the custom input value entered by the user
+      var customInput = document.getElementById('customInput').value;
+      
+      // Make the API call using the custom API
+      var apiUrl = `http://api.example.com/customAPI?param=${customInput}&username=${username}`;
+      // Perform the necessary fetch or AJAX call to apiUrl
+      console.log('Calling Custom API');
+    }
     
+    // Add more API functions here for each API row
     
   </script>
 </body>

@@ -29,11 +29,12 @@
       <th>Action</th>
     </tr>
     <tr>
-      <td>Country Info</td>
-      <td>Get information about a specific country</td>
+      <td>Find Nearby Wikipedia Articles</td>
+      <td>Retrieve nearby Wikipedia articles based on latitude and longitude</td>
       <td>
-        <input type="text" id="countryCode" placeholder="Country Code">
-        <button onclick="getCountryInfo()">Get Country Info</button>
+        <input type="text" id="latitude" placeholder="Latitude">
+        <input type="text" id="longitude" placeholder="Longitude">
+        <button onclick="findNearbyWikipediaArticles()">Find Nearby Wikipedia Articles</button>
       </td>
     </tr>
     <tr>
@@ -62,14 +63,15 @@
     // Replace with your actual GeoNames API username
     const username = 'YOUR_GEO_NAMES_USERNAME';
 
-    function getCountryInfo() {
-      // Get the country code entered by the user
-      var countryCode = document.getElementById('countryCode').value;
+    function findNearbyWikipediaArticles() {
+      // Get the latitude and longitude values entered by the user
+      var latitude = document.getElementById('latitude').value;
+      var longitude = document.getElementById('longitude').value;
       
-      // Make the API call using the GeoNames Country Info API
-      var apiUrl = `http://api.geonames.org/countryInfoJSON?country=${countryCode}&username=${username}`;
+      // Make the API call using the GeoNames Find Nearby Wikipedia Articles API
+      var apiUrl = `http://api.geonames.org/findNearbyWikipediaJSON?lat=${latitude}&lng=${longitude}&username=${username}`;
       // Perform the necessary fetch or AJAX call to apiUrl
-      console.log('Calling Country Info API');
+      console.log('Calling Find Nearby Wikipedia Articles API');
     }
     
     function getEarthquakes() {

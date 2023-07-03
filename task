@@ -32,6 +32,7 @@
       <td>Country Info</td>
       <td>Get information about a specific country</td>
       <td>
+        <input type="text" id="countryCode" placeholder="Country Code">
         <button onclick="getCountryInfo()">Get Country Info</button>
       </td>
     </tr>
@@ -39,6 +40,10 @@
       <td>Earthquakes</td>
       <td>Retrieve information about recent earthquakes</td>
       <td>
+        <input type="text" id="north" placeholder="North">
+        <input type="text" id="south" placeholder="South">
+        <input type="text" id="east" placeholder="East">
+        <input type="text" id="west" placeholder="West">
         <button onclick="getEarthquakes()">Get Earthquakes</button>
       </td>
     </tr>
@@ -51,15 +56,6 @@
         <button onclick="findNearestAddress()">Find Nearest Address</button>
       </td>
     </tr>
-    <tr>
-      <td>Custom API</td>
-      <td>Custom API Description</td>
-      <td>
-        <input type="text" id="customInput" placeholder="Custom Input">
-        <button onclick="callCustomAPI()">Call Custom API</button>
-      </td>
-    </tr>
-    <!-- Add more API rows here -->
   </table>
   
   <script>
@@ -67,15 +63,24 @@
     const username = 'YOUR_GEO_NAMES_USERNAME';
 
     function getCountryInfo() {
+      // Get the country code entered by the user
+      var countryCode = document.getElementById('countryCode').value;
+      
       // Make the API call using the GeoNames Country Info API
-      var apiUrl = `http://api.geonames.org/countryInfoJSON?country=US&username=${username}`;
+      var apiUrl = `http://api.geonames.org/countryInfoJSON?country=${countryCode}&username=${username}`;
       // Perform the necessary fetch or AJAX call to apiUrl
       console.log('Calling Country Info API');
     }
     
     function getEarthquakes() {
+      // Get the earthquake parameters entered by the user
+      var north = document.getElementById('north').value;
+      var south = document.getElementById('south').value;
+      var east = document.getElementById('east').value;
+      var west = document.getElementById('west').value;
+      
       // Make the API call using the GeoNames Earthquakes API
-      var apiUrl = `http://api.geonames.org/earthquakesJSON?north=44.1&south=-9.9&east=-22.4&west=55.2&username=${username}`;
+      var apiUrl = `http://api.geonames.org/earthquakesJSON?north=${north}&south=${south}&east=${east}&west=${west}&username=${username}`;
       // Perform the necessary fetch or AJAX call to apiUrl
       console.log('Calling Earthquakes API');
     }
@@ -90,19 +95,6 @@
       // Perform the necessary fetch or AJAX call to apiUrl
       console.log('Calling Find Nearest Address API');
     }
-    
-    function callCustomAPI() {
-      // Get the custom input value entered by the user
-      var customInput = document.getElementById('customInput').value;
-      
-      // Make the API call using the custom API
-      var apiUrl = `http://api.example.com/customAPI?param=${customInput}&username=${username}`;
-      // Perform the necessary fetch or AJAX call to apiUrl
-      console.log('Calling Custom API');
-    }
-    
-    // Add more API functions here for each API row
-    
   </script>
 </body>
 </html>

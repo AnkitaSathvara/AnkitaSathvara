@@ -1,1 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Table</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>API Table</h1>
+
+    <table>
+        <tr>
+            <th>API</th>
+            <th>API Description</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td>Address API</td>
+            <td>Retrieve address information</td>
+            <td>
+                <button onclick="callAPI('address_api.php', 'addressResponse')">Submit</button>
+                <pre id="addressResponse"></pre>
+            </td>
+        </tr>
+        <tr>
+            <td>Street API</td>
+            <td>Retrieve street information</td>
+            <td>
+                <button onclick="callAPI('street_api.php', 'streetResponse')">Submit</button>
+                <pre id="streetResponse"></pre>
+            </td>
+        </tr>
+        <tr>
+            <td>Children API</td>
+            <td>Retrieve children information</td>
+            <td>
+                <button onclick="callAPI('children_api.php', 'childrenResponse')">Submit</button>
+                <pre id="childrenResponse"></pre>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        function callAPI(apiUrl, responseId) {
+            var responseElement = document.getElementById(responseId);
+            
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    responseElement.textContent = JSON.stringify(data);
+                })
+                .catch(error => {
+                    responseElement.textContent = "Error occurred while calling the API.";
+                    console.error(error);
+                });
+        }
+    </script>
+</body>
+</html>
 

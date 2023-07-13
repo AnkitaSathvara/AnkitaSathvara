@@ -42,7 +42,7 @@
                 <option value="JE">Jersey</option>
                 <option value="BM">Bermuda</option>
             </select>
-          <button onclick="submit('children')">submit</button>
+            <button id="btnRun">submit</button>
         </td>
       </tr>
       <tr>
@@ -58,7 +58,7 @@
                 <option value="NL">Netherlands</option>
                 <option value="AT">Austria</option>
             </select>
-          <button onclick="submit('Timezone')">submit</button>
+            <button id="btnRun">submit</button>
         </td>
       </tr>
       <tr>
@@ -73,7 +73,7 @@
                 <option value="DE">Germany</option>
                 <option value="NL">Netherlands</option>
             </select>
-          <button onclick="submit('Contains')">submit</button>
+            <button id="btnRun">submit</button>
         </td>
       </tr>
 

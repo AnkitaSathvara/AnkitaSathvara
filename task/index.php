@@ -1,70 +1,96 @@
-<!doctype html>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>API Data Table</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
 
-<html lang="en">
+    th, td {
+      text-align: center;
+      border: 1px solid black;
+      padding: 8px;
+      
+    }
+  </style>
+</head>
+<body>
+          
+    
 
-	<head>
+   
+  <table>
+    <thead>
+      <tr>
+        <th>API</th>
+        <th>API Description</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Children</td>
+        <td>
+          <p>Retrieves information about children of a specific entity</p>
+          
+        </td>
+        <td>
+            <select id="selCountry">
+                <option value="AI">Anguilla</option>
+                <option value="JE">Jersey</option>
+                <option value="BM">Bermuda</option>
+            </select>
+          <button onclick="submit('children')">submit</button>
+        </td>
+      </tr>
+      <tr>
+        <td>Timezone</td>
+        <td>
+           
+          <p>Retrieves the timezone information for a specific latitude and longitude coordinates.</p>
+          
+        </td>
+        <td>
+            <select id="selCountry">
+                <option value="IT">Italy</option>
+                <option value="NL">Netherlands</option>
+                <option value="AT">Austria</option>
+            </select>
+          <button onclick="submit('Timezone')">submit</button>
+        </td>
+      </tr>
+      <tr>
+        <td>Contains</td>
+        <td>
+          <p>Determines if a country contains a particular subdivision</p>
+          
+        </td>
+        <td>
+            <select id="selCountry">
+                <option value="FR">France</option>
+                <option value="DE">Germany</option>
+                <option value="NL">Netherlands</option>
+            </select>
+          <button onclick="submit('Contains')">submit</button>
+        </td>
+      </tr>
 
-		<meta charset="utf-8">
+      <tr >
+        <td colspan = "3">Longitude:</td>
+       
+      </tr>
+       
+      <tr >
+        <td colspan = "3">Latitude:</td>
+       
+      </tr>
+    
+      
+    </tbody>
+  </table>
 
-		<title>AJAX/PHP/CURL/JSON example</title>
-		<meta name="description" content="AJAX/PHP/CURL/JSON example">
-		<meta name="author" content="Ankitaben Sathvara">
-
-	</head>
-
-	<body>
-
-		<select id="selPostalcode">
-			<option value="8775">8775</option>
-			<option value="8774">8774</option>
-			<option value="8772">8772</option>
-			<option value="8784">8784</option>
-		</select>
-
-		<select id="selCountrycode">
-			
-			<option value="CH">CH</option>
-		</select>
-
-
-		<button id="btnRun">Run</button>
-
-		<br><br>
-
-		<div id="divResults">
-			
-			<table>
-
-				<tr>
-					<td align="right">
-						Langitude: 
-					</td>
-					<td id="txtLangitude">
-						
-					</td>
-
-				</tr>
-
-				<tr>
-					<td align="right">
-						Latitude: 
-					</td>
-					<td id="txtLatitude">
-						
-					</td>
-
-				</tr>
-
-				
-
-				
-			</table>
-
-		</div>
-
-		<script type="application/javascript" src="libs/js/jquery-2.2.3.min.js"></script>
-		<script type="application/javascript" src="libs/js/script.js"></script>
-
-	</body>
-
+ 
+</body>
 </html>

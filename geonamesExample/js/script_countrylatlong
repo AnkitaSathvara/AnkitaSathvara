@@ -1,0 +1,65 @@
+// $("#projectKey").change(function() {
+// 	alert( $('option:selected', this).text() );
+// });
+$('#projectKey').change(function () {
+//	alert($('option:selected', this).text());
+	// selecting loading div
+	const loader = document.querySelector("#loading");
+
+	// showing loading
+	function displayLoading() {
+		loader.classList.add("display");
+		// to stop loading after some time
+		setTimeout(() => {
+			//loader.classList.remove("display");
+		}, 5000);
+	}
+
+	// hiding loading 
+	function hideLoading() {
+		loader.classList.remove("display");
+	}
+
+	displayLoading()
+
+	$.ajax({
+		url: "libs/php/getCountryLatLong.php",
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			country:  $('option:selected', this).text(),
+			//lang: $('#selLanguage').val()
+		},
+		success: function (result) {
+			hideLoading()
+			//console.log(JSON.stringify(result));
+			
+
+			if (result.status.name == "ok") {
+                 $('#lat').val(result['data'][0]['lat']);
+				 $('#lng').val(result['data'][0]['lng']);
+
+				// console.log(result['data'][0]['bbox'].east)
+				 $('#east').val(result['data'][0]['bbox']['east']);
+				 $('#south').val(result['data'][0]['bbox']['south']);
+				 $('#north').val(result['data'][0]['bbox']['north']);
+				 $('#west').val(result['data'][0]['bbox']['west']);
+			
+				//getchildren(result['data'][0]['lat'], result['data'][0]['lng'])
+				// $('#txtContinent').html(result['data'][0]['continent']);
+				// $('#txtCapital').html(result['data'][0]['capital']);
+				// $('#txtLanguages').html(result['data'][0]['languages']);
+				// $('#txtPopulation').html(result['data'][0]['population']);
+				// $('#txtArea').html(result['data'][0]['areaInSqKm']);
+				// $('#txtGeonameId').html(result['data'][0]['geonameId']);
+
+			}
+
+		},
+		error: function (jqXHR, textStatus, errorThrown) {
+			// your error code
+		}
+	});
+
+});
+

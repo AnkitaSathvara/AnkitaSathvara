@@ -1,0 +1,132 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+
+	<title>GeoNames WebServices example</title>
+	<meta name="description" content="GeoNames WebServices example">
+	<meta name="author" content="Paddy Evans">
+	<link rel="stylesheet" type="text/css" href="libs/css/style.css">
+
+
+</head>
+
+<body>
+	<!-- <div class="loader"></div> -->
+
+	<div class="dd">
+		<!-- Country:
+		<select id="projectKey">
+			<option value="CA">Canada</option>
+			<option value="FR">France</option>
+			<option value="DE">Germany</option>
+			<option value="US">USA</option>
+
+		</select> -->
+
+		<!-- <input id="lat" type="text">
+		<input id="lng" type="text"> -->
+
+		<!-- <input id="east" type="hidden">
+		<input id="south" type="hidden">
+		<input id="north" type="hidden">
+		<input id="west" type="hidden"> -->
+		<!-- <select id="selLanguage">
+			<option value="en">English</option>
+			<option value="fr">Francais</option>
+			<option value="de">Deutsche</option>
+		</select> -->
+
+
+
+		<br>
+
+	</div>
+	<div>
+		<h2>Geonames Example</h2>
+
+		<table>
+			<tr>
+				<th>API name</th>
+				<th>API description</th>
+				<th>Action</th>
+			</tr>
+			<tr>
+				<td>1.Timezone</td>
+				<td>
+					Latitude: <input id="lattime" type="text">
+					Logitude: <input id="lngtime" type="text">
+				</td>
+				<td><button class="button button4" id="btnRunTime" type="button">Submit</button></td>
+			</tr>
+			<tr>
+				<td>2.Find nearby Place name</td>
+				<td>
+					Latitude: <input id="latplace" type="text">
+					Logitude: <input id="lngplace" type="text">
+				</td>
+				<td><button class="button button4" id="btnWeather" type="button">Submit</button></td>
+			</tr>
+			<tr>
+				<td>3.Earth quakes</td>
+				<td>
+					East: <input id="east" type="text">
+					South: <input id="south" type="text"><br><br>
+					North: <input id="north" type="text">
+					West: <input id="west" type="text">
+				</td>
+				<td><button class="button button4" id="btnEarthquakes" type="button">Submit</button></td>
+			</tr>
+
+			<tr class="result">
+				<td colspan="3">
+					<div id="divResults">
+						<div id="loading"></div>
+
+						<h3>Result</h3>
+						<div class="tabTimeResults">
+							
+						</div>
+
+						<div class="tabPlaceResults">
+
+						</div>
+
+
+						<div class="tabearthquakesResults">
+
+						</div>
+
+
+
+
+					</div>
+				</td>
+
+			</tr>
+
+		</table>
+
+	</div>
+
+	<script type="application/javascript" src="libs/js/jquery-2.2.3.min.js"></script>
+	<script type="application/javascript" src="libs/js/script.js"></script>
+	<script type="application/javascript" src="libs/js/script_timezone.js"></script>
+	<script type="application/javascript" src="libs/js/script_countrylatlong.js"></script>
+	<script type="application/javascript" src="libs/js/script_findNearbyPlaceName.js"></script>
+	<script type="application/javascript" src="libs/js/script_earthquakes.js"></script>
+
+
+	<script>
+		$(window).on('load', function () {
+
+			//	$("#projectKey").trigger('change');
+
+		});
+	</script>
+</body>
+
+</html>

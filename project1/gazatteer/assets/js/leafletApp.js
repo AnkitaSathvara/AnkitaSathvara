@@ -159,6 +159,8 @@ L.easyButton('<i class="far fa-newspaper"></i>', function(){
 
 
 //Exchange Rates Easy Button
+
+
 L.easyButton('<i class="fas fa-money-bill-wave"></i>', function(){
     $.ajax({
         url: "assets/php/exchangeRates.php",
@@ -187,6 +189,7 @@ L.easyButton('<i class="fas fa-money-bill-wave"></i>', function(){
     });
     $('#currencyModal').modal('show');
 }, 'Currency Information').addTo(map);
+
 
 //Covid Easy Button
 L.easyButton('<i class="fas fa-virus"></i>', function(){

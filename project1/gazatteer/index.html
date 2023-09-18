@@ -16,6 +16,8 @@
   <link rel="stylesheet" href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css'  />
   <link rel="stylesheet" href="https://cdn.maptiler.com/mapbox-gl-js/v1.5.1/mapbox-gl.css" />
   <link rel="stylesheet" href="assets/css/leafletMainStyle.css">
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
  
   
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -61,40 +63,68 @@
           <table id="countryInfoTable" class="table">
             <div id="txtWikiImg"></div>
             <tbody>
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
               <tr>
-                <th scope="row">Population:</th>
-                <td id="txtPopulation"></td>
+                <th scope ="row">
+                  <i class="fa-solid fa-people-group"> Population : </i>
+                </th>
+                  <td id="txtPopulation"></td>
               </tr>
+
               <tr>
-                <th scope="row">Capital:</th>
+                <th scope ="row">
+                  <i class="fa-solid fa-city"> Capital : </i>
+                </th>
                 <td id="txtCapital"></td>
               </tr>
+              
               <tr>
-                <th scope="row">Language(s):</th>
+                <th scope ="row">
+                  <i class="fa-solid fa-language"> Language(s) : </i>
+            </th>
                 <td id="txtLanguages"></td>
               </tr>
+
               <tr>
-                <th scope="row">Demonym:</th>
+                <th scope="row">
+                <i class="fa-regular fa-id-card"> Demonym : </i>
+              </th>
                 <td id="txtDemonym"></td>
               </tr>
+
               <tr>
-                <th scope="row">Area:</th>
+                <th scope="row">
+                  <i class="fa-solid fa-chart-area"> Area : </i>
+              </th>
                 <td id="txtArea"></td>
               </tr>
+
               <tr>
-                <th scope="row">ISO2 Country Code:</th>
+                <th scope="row">
+                  <i class="fa-solid fa-globe"> ISO2 Country Code : </i>
+                </th>
                 <td id="txtIso2"></td>
               </tr>
+
               <tr>
-                <th scope="row">ISO3 Country Code:</th>
+               <th scope="row">
+                <i class="fa-solid fa-globe"> ISO3 Country Code : </i>
+                </th>
                 <td id="txtIso3"></td>
               </tr>
+
               <tr>
-                <th scope="row">Calling Code:</th>
+                <th scope="row">
+                  <i class="fa-solid fa-phone"> Calling Code : </i>
+               </th>
                 <td id="txtCallingCode"></td>
               </tr>
+
               <tr>
-                <th scope="row">Country Domain:</th>
+                <th scope="row">
+                  <i class="fa-brands fa-creative-commons-pd"> Country Domain : </i>
+                </th>
                 <td id="txtDomain"></td>
               </tr>
             </tbody>
@@ -119,28 +149,40 @@
         <div class="modal-body short-modal">
           <table id="covidTable" class="table">
             <tbody>
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
               <tr>
-                <th scope="row">Cases:</th>
+                <th scope="row">
+                  <i class="fa-solid fa-book"> Cases : </i>
+                </th>
                 <td id="txtCovidCases"></td>
               </tr>
               <tr>
-                <th scope="row">Recovered:</th>
+                <th scope="row">
+                  <i class="fa-solid fa-house-medical-circle-check"> Recovered : </i> </th>
                 <td id="txtCovidRecovered"></td>
               </tr>
               <tr>
-                <th scope="row">Deaths:</th>
+                <th scope="row">
+                  <i class="fa-solid fa-book-skull"> Deaths : </i></th>
                 <td id="txtCovidDeaths"></td>
               </tr>
               <tr>
-                <th scope="row">Cases Per Million:</th>
+                <th scope="row">
+                  <i class="fa-solid fa-percent">  Cases Per Million : </i></th>
+
+                </th>
                 <td id="txtCovidPerMillion"></td>
               </tr>
               <tr>
-                <th scope="row">Death Rate:</th>
+                <th scope="row">
+                  <i class="fa-solid fa-percent">  Death Rate :  </i></th>
+                  </th>
                 <td id="txtCovidDeathRate"></td>
               </tr>
               <tr>
-                <th scope="row">Recovery Rate:</th>
+                <th scope="row">
+                  <i class="fa-solid fa-percent">  Recovery Rate : </i></th>
                 <td id="txtCovidRecoveryRate"></td>
               </tr>
             </tbody>
@@ -164,39 +206,49 @@
           <h1 id="txtCapitalWeatherName"></h1>
           <table id="weatherTable" class="table">
             <tbody>
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
               <tr>
                 <td id="CapitalWeatherIcon"></td>
-                <th scope="row">Current Temp:</th>
+                <th scope="row">
+                  <i class="fa-solid fa-temperature-three-quarters"> Current Temp : </i></th>
                 <td id="txtCapitalWeatherCurrent"></td>
               </tr>
               <tr>
                 <td id="CapitalWindIcon"></td>
-                <th class="text-sm-left" scope="row">Windspeed:</th>
+                <th class="text-sm-left" scope="row">
+                  <i class="fa-solid fa-wind"> Windspeed : </i></th>
                 <td id="txtCapitalWeatherWindspeed"></td>
               </tr>
               <tr>
                 <td id="CapitalHumidityIcon"></td>
-                <th scope="row">Humidity:</th>
+                <th scope="row">
+                  <i class="fa-solid fa-droplet"> Humidity : </i></th>
                 <td id="txtCapitalWeatherHumidity">2</td>
               </tr>
               <tr>
                 <td class="CapitalHiTempIcon"></td>
-                <th scope="row">High:</th>
+                <th scope="row">
+                  <i class="fa-solid fa-temperature-high"> High : </i></th>
                 <td id="txtCapitalWeatherHi"></td>
               </tr>
               <tr>
                 <td class="CapitalLoTempIcon"></td>
-                <th scope="row">Low:</th>
+                <th scope="row">
+                  <i class="fa-solid fa-temperature-low"> Low : </i>
+                </th>
                 <td id="txtCapitalWeatherLo"></td>
               </tr>
               <tr>
                 <td class="CapitalHiTempIcon"></td>
-                <th scope="row">Tomorrow's High:</th>
+                <th scope="row"> 
+                  <i class="fa-solid fa-temperature-high"> Tomorrow's High : </i> </th>
                 <td id="txtCapitalTomorrowsWeatherHi"></td>
               </tr>
               <tr>
                 <td class="CapitalLoTempIcon"></td>
-                <th scope="row">Tomorrow's Low:</th>
+                <th scope="row">
+                  <i class="fa-solid fa-temperature-low"> Tomorrow's Low : </i> </th>
                 <td id="txtCapitalTomorrowsWeatherLo"></td>
               </tr>
             </tbody>
@@ -233,7 +285,7 @@
     <div class="from">
       <p>From</p>
       <div class ="Select-box">
-        <img src="https://flagsapi.com/GB/flat/64.png" alt="Flag" >     
+        <img src="https://flagsapi.com/US/flat/64.png" alt="Flag" >     
        <select>
         
        </select>

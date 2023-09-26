@@ -33,6 +33,7 @@ function numberWithCommas(x) {
 }
 
 //map
+
 mapboxgl.accessToken = 'pk.eyJ1IjoiZXN0cmFkYTExMDciLCJhIjoiY2p3cmkxaXE1MWs2ajRibGV4bjZna2cyZyJ9.rfXkxJ59K98sg9us_cOj3w';
 
 // L.tileLayer('https://tile.jawg.io/jawg-streets/{z}/{x}/{y}.png?access-token=B5c7xyU8C9pYj2cSITJ1HHTfUeL6zaLCh8styLvSen0e5nBgU4p53kJ84IWOGAqZ', {})
@@ -41,21 +42,35 @@ var openStreetMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.
 	maxZoom: 19,
 	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }),
+
     hybrid = L.mapboxGL({
-    attribution: "\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e",
-    style: 'https://api.maptiler.com/maps/hybrid/style.json?key=IFRW9BnLg67kStosRQhA'});
+        attribution: "\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e",
+        style: 'https://api.maptiler.com/maps/hybrid/style.json?key=IFRW9BnLg67kStosRQhA'});
+    
+    
+    
+    var Esri_WorldTerrain = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}', {
+	attribution: 'Tiles &copy; Esri &mdash; Source: USGS, Esri, TANA, DeLorme, and NPS',
+	maxZoom: 13
+});
+
 
 var map = L.map('map', {
     maxZoom: 18,
     layers: [openStreetMap]
 }).fitWorld();
 
+// control layers 
+
 var baseMaps = {
     "Satellite Map": hybrid,
-    "Streets Map": openStreetMap
+    "Streets Map": openStreetMap,
+    "World Terrian" : Esri_WorldTerrain
+   
 };
 
 L.control.layers(baseMaps).addTo(map);
+
 
 //Country Information Easy Button
 L.easyButton('<i class="fas fa-info"></i>', function(){

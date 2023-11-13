@@ -2,7 +2,7 @@
 
 	// example use from browser
 	// use insertDepartment.php first to create new dummy record and then specify it's id in the command below
-	// http://localhost/companydirectory/libs/php/deleteDepartmentByID.php?id= <id>
+	// http://localhost/companydirectory/libs/php/deleteDepartmentByID.php?id=<id>
 
 	// remove next two lines for production
 	
@@ -33,14 +33,16 @@
 
 	}	
 
-	// $_REQUEST used for development / debugging. Remember to cange to $_POST for production
+	// SQL statement accepts parameters and so is prepared to avoid SQL injection.
+	// $_REQUEST used for development / debugging. Remember to change to $_POST for production
 
-	$query = 'DELETE FROM department WHERE id = ' . $_REQUEST['deleteDeptID'];
-	//$query = 'DELETE FROM department WHERE id = ' . $_POST['deleteDeptID'];
-
-	$result = $conn->query($query);
+	$query = $conn->prepare('DELETE FROM department WHERE id = ?');
 	
-	if (!$result) {
+	$query->bind_param("i", $_REQUEST['id']);
+
+	$query->execute();
+	
+	if (false === $query) {
 
 		$output['status']['code'] = "400";
 		$output['status']['name'] = "executed";

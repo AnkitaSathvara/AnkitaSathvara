@@ -1,16 +1,16 @@
+
 <?php
-	// $cd_host = "db5001833626.hosting-data.io";
-	// $cd_port = 3306;
-	// $cd_socket = "";
-	// $cd_user = "dbu531207"; // user name
-	// $cd_password = "Josie2410!@#"; // password
-	// $cd_dbname = "dbs1508494"; // database name
+
+	// connection details for MySQL database
 
 	$cd_host = "localhost";
 	$cd_port = 3306;
 	$cd_socket = "C:/xampp/mysql/mysql.sock";
-	$cd_user = "root"; 
-	$cd_password = ""; 
-	$cd_dbname = "dbs1508494"; 
+
+	// database name, username and password
+
+	$cd_dbname = "companydirectory";
+	$cd_user = "root";
+	$cd_password = "";
 
 ?>

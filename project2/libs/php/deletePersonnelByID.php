@@ -2,7 +2,7 @@
 
 	// example use from browser
 	// use insertDepartment.php first to create new dummy record and then specify it's id in the command below
-	// http://localhost/companydirectory/libs/php/deleteDepartmentByID.php?id= <id>
+	// http://localhost/companydirectory/libs/php/deleteDepartmentByID.php?id=<id>
 
 	// remove next two lines for production
 	
@@ -16,8 +16,6 @@
 	header('Content-Type: application/json; charset=UTF-8');
 
 	$conn = new mysqli($cd_host, $cd_user, $cd_password, $cd_dbname, $cd_port, $cd_socket);
-    $deleteID = $conn->real_escape_string($_REQUEST['id']);
-	//$deleteID = $conn->real_escape_string($_POST['id']);
 
 	if (mysqli_connect_errno()) {
 		
@@ -35,13 +33,16 @@
 
 	}	
 
-	// $_REQUEST used for development / debugging. Remember to cange to $_POST for production
+	// SQL statement accepts parameters and so is prepared to avoid SQL injection.
+	// $_REQUEST used for development / debugging. Remember to change to $_POST for production
 
-	$query = "DELETE FROM personnel WHERE id = '$deleteID'";
-
-	$result = $conn->query($query);
+	$query = $conn->prepare('DELETE FROM personnel WHERE id = ?');
 	
-	if (!$result) {
+	$query->bind_param("i", $_REQUEST['id']);
+
+	$query->execute();
+	
+	if (false === $query) {
 
 		$output['status']['code'] = "400";
 		$output['status']['name'] = "executed";

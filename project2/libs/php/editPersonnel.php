@@ -1,67 +1,74 @@
 <?php
-    ini_set('display_errors', 'On');
-    error_reporting(E_ALL);
 
-    include("config.php");
+	// example use from browser
+	// http://localhost/companydirectory/libs/php/insertDepartment.php?name=New%20Department&locationID=<id>
 
-    header('Content-Type: application/json; charset=UTF-8');
+	// remove next two lines for production
+	
+	ini_set('display_errors', 'On');
+	error_reporting(E_ALL);
 
-    $executionStartTime = microtime(true);
+	$executionStartTime = microtime(true);
+	
+	// this includes the login details
+	
+	include("config.php");
 
-    $conn = new mysqli($cd_host, $cd_user, $cd_password, $cd_dbname, $cd_port, $cd_socket);
+	header('Content-Type: application/json; charset=UTF-8');
 
-    if (mysqli_connect_errno()) {
-        $output['status']['code'] = "300";
-        $output['status']['name'] = "failure";
-        $output['status']['description'] = "database unavailable";
-        $output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
-        $output['data'] = [];
+	$conn = new mysqli($cd_host, $cd_user, $cd_password, $cd_dbname, $cd_port, $cd_socket);
 
-        mysqli_close($conn);
+	if (mysqli_connect_errno()) {
+		
+		$output['status']['code'] = "300";
+		$output['status']['name'] = "failure";
+		$output['status']['description'] = "database unavailable";
+		$output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
+		$output['data'] = [];
 
-        echo json_encode($output);
+		mysqli_close($conn);
 
-        exit;
-    }
+		echo json_encode($output);
 
-    // Retrieve data from the POST request
-    $id = $conn->real_escape_string($_POST['id']);
-    $firstName = $conn->real_escape_string($_POST['firstName']);
-    $lastName = $conn->real_escape_string($_POST['lastName']);
-    $jobTitle = $conn->real_escape_string($_POST['jobTitle']);
-    $email = $conn->real_escape_string($_POST['email']);
-    $departmentID = $conn->real_escape_string($_POST['departmentID']);
+		exit;
 
-    // Construct the SQL query to update personnel data
-    $query = "UPDATE personnel SET 
-              firstName = '$firstName', 
-              lastName = '$lastName', 
-              jobTitle = '$jobTitle', 
-              email = '$email', 
-              departmentID = '$departmentID' 
-              WHERE id = '$id'"; 
-    $result = $conn->query($query);
+	}	
 
-    if (!$result) {
-        $output['status']['code'] = "400";
-        $output['status']['name'] = "executed";
-        $output['status']['description'] = "query failed";
-        $output['data'] = [];
+	// SQL statement accepts parameters and so is prepared to avoid SQL injection.
+	// $_REQUEST used for development / debugging. Remember to change to $_POST for production
 
-        mysqli_close($conn);
+	$query = $conn->prepare('UPDATE personnel SET firstName = ?,lastName = ?,jobTitle = ?,email = ?,departmentID = ? WHERE id = ?');
+    
+    $query->bind_param('sssssi', $_REQUEST['firstName'], $_REQUEST['lastName'], $_REQUEST['jobTitle'], $_REQUEST['email'], $_REQUEST['departmentID'], $_REQUEST['id']);
 
-        echo json_encode($output);
 
-        exit;
-    }
 
-    $output['status']['code'] = "200";
-    $output['status']['name'] = "ok";
-    $output['status']['description'] = "success";
-    $output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
-    $output['data'] = [];
 
-    mysqli_close($conn);
+	$query->execute();
+	
+	if (false === $query) {
 
-    echo json_encode($output);
+		$output['status']['code'] = "400";
+		$output['status']['name'] = "executed";
+		$output['status']['description'] = "query failed";	
+		$output['data'] = [];
+
+		mysqli_close($conn);
+
+		echo json_encode($output); 
+
+		exit;
+
+	}
+
+	$output['status']['code'] = "200";
+	$output['status']['name'] = "ok";
+	$output['status']['description'] = "success";
+	$output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
+	$output['data'] = [];
+	
+	mysqli_close($conn);
+
+	echo json_encode($output); 
+
 ?>

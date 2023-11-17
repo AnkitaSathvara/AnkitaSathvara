@@ -1,25 +1,22 @@
 <?php
+
+	// example use from browser
+	// http://localhost/companydirectory/libs/php/insertDepartment.php?name=New%20Department&locationID=<id>
+
+	// remove next two lines for production
+	
 	ini_set('display_errors', 'On');
 	error_reporting(E_ALL);
 
 	$executionStartTime = microtime(true);
-
+	
+	// this includes the login details
+	
 	include("config.php");
 
 	header('Content-Type: application/json; charset=UTF-8');
 
 	$conn = new mysqli($cd_host, $cd_user, $cd_password, $cd_dbname, $cd_port, $cd_socket);
-    $fName = $conn->real_escape_string($_REQUEST['fName']);
-    $lName = $conn->real_escape_string($_REQUEST['lName']);
-    $pEmail = $conn->real_escape_string($_REQUEST['pEmail']);
-    $pDept = $conn->real_escape_string($_REQUEST['pDept']);
-    $pJobTitle = $conn->real_escape_string($_REQUEST['pJobTitle']);
-
-	// $fName = $conn->real_escape_string($_POST['fName']);
-    // $lName = $conn->real_escape_string($_POST['lName']);
-    // $pEmail = $conn->real_escape_string($_POST['pEmail']);
-    // $pDept = $conn->real_escape_string($_POST['pDept']);
-    // $pJobTitle = $conn->real_escape_string($_POST['pJobTitle']);
 
 	if (mysqli_connect_errno()) {
 		
@@ -37,12 +34,22 @@
 
 	}	
 
-	// $_REQUEST used for development / debugging. Remember to cange to $_POST for production
-    $query = "INSERT INTO personnel (firstName, lastName, jobTitle, email, departmentID) VALUES('$fName', '$lName', '$pJobTitle', '$pEmail', '$pDept')";
+	// SQL statement accepts parameters and so is prepared to avoid SQL injection.
+	// $_REQUEST used for development / debugging. Remember to change to $_POST for production
 
-	$result = $conn->query($query);
+    
+	// $query = $conn->prepare('INSERT INTO personnel (firstName,lastName,jobTitle,email,departmentID) VALUES(?,?,?,?,?)');
+    // $query->bind_param('sc', $_REQUEST['firstName'], $_REQUEST['lastName'], $_REQUEST['jobTitle'], $_REQUEST['email'], $_REQUEST['departmentID']);
+
+    $query = $conn->prepare('INSERT INTO personnel (firstName, lastName, jobTitle, email, departmentID) VALUES (?, ?, ?, ?, ?)');
+    $query->bind_param('sssss', $_REQUEST['firstName'], $_REQUEST['lastName'], $_REQUEST['jobTitle'], $_REQUEST['email'], $_REQUEST['departmentID']);
+
+	$query->execute();
 	
-	if (!$result) {
+
+
+
+	if (false === $query) {
 
 		$output['status']['code'] = "400";
 		$output['status']['name'] = "executed";

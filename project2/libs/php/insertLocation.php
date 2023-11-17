@@ -1,7 +1,7 @@
 <?php
 
 	// example use from browser
-	// http://localhost/companydirectory/libs/php/insertDepartment.php?name=New%20Department&locationID=1
+	// http://localhost/companydirectory/libs/php/insertDepartment.php?name=New%20Department&locationID=<id>
 
 	// remove next two lines for production
 	
@@ -9,15 +9,14 @@
 	error_reporting(E_ALL);
 
 	$executionStartTime = microtime(true);
-
+	
+	// this includes the login details
+	
 	include("config.php");
 
 	header('Content-Type: application/json; charset=UTF-8');
 
 	$conn = new mysqli($cd_host, $cd_user, $cd_password, $cd_dbname, $cd_port, $cd_socket);
-	$addLocationName = $conn->real_escape_string($_REQUEST['addLocationName']);
-	//$addLocationName = $conn->real_escape_string($_POST['addLocationName']);
-    
 
 	if (mysqli_connect_errno()) {
 		
@@ -35,12 +34,16 @@
 
 	}	
 
-	// $_REQUEST used for development / debugging. Remember to cange to $_POST for production
-	$query = "INSERT INTO location (name) VALUES('$addLocationName')";
+	// SQL statement accepts parameters and so is prepared to avoid SQL injection.
+	// $_REQUEST used for development / debugging. Remember to change to $_POST for production
 
-	$result = $conn->query($query);
+	$query = $conn->prepare('INSERT INTO location (name) VALUES(?)');
+
+    $query->bind_param('s', $_REQUEST['name']);
+
+	$query->execute();
 	
-	if (!$result) {
+	if (false === $query) {
 
 		$output['status']['code'] = "400";
 		$output['status']['name'] = "executed";

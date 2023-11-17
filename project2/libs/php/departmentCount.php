@@ -1,63 +1,79 @@
 <?php
-    ini_set('display_errors', 'On');
-    error_reporting(E_ALL);
 
-    include("config.php");
+	// example use from browser
+	// http://localhost/companydirectory/libs/php/getDepartmentByID.php?id=<id>
 
-    header('Content-Type: application/json; charset=UTF-8');
+	// remove next two lines for production	
 
-    $executionStartTime = microtime(true);
+	ini_set('display_errors', 'On');
+	error_reporting(E_ALL);
 
-    $conn = new mysqli($cd_host, $cd_user, $cd_password, $cd_dbname, $cd_port, $cd_socket);
+	$executionStartTime = microtime(true);
 
-    if (mysqli_connect_errno()) {
-        $output['status']['code'] = "300";
-        $output['status']['name'] = "failure";
-        $output['status']['description'] = "database unavailable";
-        $output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
-        $output['data'] = [];
+	include("config.php");
 
-        mysqli_close($conn);
+	header('Content-Type: application/json; charset=UTF-8');
 
-        echo json_encode($output);
+	$conn = new mysqli($cd_host, $cd_user, $cd_password, $cd_dbname, $cd_port, $cd_socket);
 
-        exit;
-    }
+	if (mysqli_connect_errno()) {
+		
+		$output['status']['code'] = "300";
+		$output['status']['name'] = "failure";
+		$output['status']['description'] = "database unavailable";
+		$output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
+		$output['data'] = [];
+		
+		mysqli_close($conn);
 
-    // Retrieve the location ID parameter from the POST request
-    $id = $conn->real_escape_string($_POST['id']);
+		echo json_encode($output);
+		
+		exit;
 
-    // Construct the SQL query to get department count by location
-    $query = "SELECT locationName, COUNT(*) AS locationCount FROM your_department_table_name WHERE locationID = '$id'"; // Replace 'your_department_table_name' with the actual table name for departments
+	}	
 
-    $result = $conn->query($query);
+	// SQL statement accepts parameters and so is prepared to avoid SQL injection.
+	// $_REQUEST used for development / debugging. Remember to change to $_POST for production
 
-    if (!$result) {
-        $output['status']['code'] = "400";
-        $output['status']['name'] = "executed";
-        $output['status']['description'] = "query failed";
-        $output['data'] = [];
+	$query = $conn->prepare('SELECT COUNT(*) as locationCount , d.name as locationName FROM `department` d LEFT JOIN location l on d.locationID = l.id WHERE locationID =?');
 
-        mysqli_close($conn);
 
-        echo json_encode($output);
+	$query->bind_param("i", $_REQUEST['id']);
 
-        exit;
-    }
+	$query->execute();
+	
+	if (false === $query) {
 
-    $data = [];
+		$output['status']['code'] = "400";
+		$output['status']['name'] = "executed";
+		$output['status']['description'] = "query failed";	
+		$output['data'] = [];
 
-    while ($row = mysqli_fetch_assoc($result)) {
-        $data[] = $row;
-    }
+		echo json_encode($output); 
+	
+		mysqli_close($conn);
+		exit;
 
-    $output['status']['code'] = "200";
-    $output['status']['name'] = "ok";
-    $output['status']['description'] = "success";
-    $output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
-    $output['data'] = $data;
+	}
 
-    mysqli_close($conn);
+	$result = $query->get_result();
 
-    echo json_encode($output);
+   	$data = [];
+
+	while ($row = mysqli_fetch_assoc($result)) {
+
+		array_push($data, $row);
+
+	}
+
+	$output['status']['code'] = "200";
+	$output['status']['name'] = "ok";
+	$output['status']['description'] = "success";
+	$output['status']['returnedIn'] = (microtime(true) - $executionStartTime) / 1000 . " ms";
+	$output['data'] = $data;
+
+	echo json_encode($output); 
+
+	mysqli_close($conn);
+
 ?>

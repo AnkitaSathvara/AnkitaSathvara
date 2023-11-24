@@ -12,9 +12,9 @@ ini_set('display_errors', 1);
     
     $myPersonalEmail = "ankitasathvara3006@gmail.com";
 
-    require 'contact_us/phpmailer/src/Exception.php';
-    require 'contact_us/phpmailer/src/PHPMailer.php';
-    require 'contact_us/phpmailer/src/SMTP.php';
+    require 'assets/phpmailer/src/Exception.php';
+    require 'assets/phpmailer/src/PHPMailer.php';
+    require 'assets/phpmailer/src/SMTP.php';
 
     if(isset($_POST['submit'])) {
 
